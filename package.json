@@ -1,7 +1,7 @@
 {
   "name": "phonebook",
   "engines": {
-    "node": "11.10.0"
+    "node": "16.13.0"
   },
   "version": "1.0.0",
   "description": "",
@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "author": "Bojana Bakic",
   "license": "MIT",

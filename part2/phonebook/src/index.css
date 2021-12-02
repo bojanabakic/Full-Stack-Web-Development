@@ -1,0 +1,20 @@
+.message {
+  color: white;
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 2px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.message_success {
+  background-color: #2cac21;
+  border-color: #125e0b;
+}
+
+.message_failed {
+  background-color: #f44336;
+  border-color: #7a1912;
+}

@@ -1,0 +1,27 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note over server:
+request for a new note 
+end note
+
+server->browser: Response HTTP status code 302 (URL Redirection)
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server->browser: Response with HTML code
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server->browser: Response with CSS code (main.css)
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server->browser: Response with JS code (main.js)
+
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server->browser: Response with json file ([{ content: "HTML is easy", date: "2019-05-23" }, ...])
+
+note over browser: 
+browser executes the event 
+handler that renders notes 
+to display
+end note

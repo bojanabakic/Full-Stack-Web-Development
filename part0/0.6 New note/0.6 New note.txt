@@ -1,0 +1,18 @@
+note over browser:
+user requests for a new note, 
+new note is added to the page when 
+the request is sent to server
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/spa/new_note_spa
+
+note over server: 
+sends a response upon 
+receiving the request 
+end note
+
+server->browser: Response HTTP status code 201
+
+note over browser: 
+renders webpage
+end note

@@ -2,7 +2,8 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcrypt')
+const jwt = require("jsonwebtoken")
 const Blog = require('../models/blog')
 
 beforeAll(done => {
@@ -28,7 +29,18 @@ describe('viewing a specific blog listing', () => {
 
 describe('addition of a new blog listing', () => {
   test('succeeds with valid data', async () => {
+    const user = {
+      username: 'test',
+      password: '123456'
+    }
+
+    const loggedUser = await api
+      .post('/api/login')
+      .send(user)
+      .expect('Content-Type', /application\/json/)
+    
     const newBlog = {
+      _id: '5a422bc61b54a6762f4d17fd',
       title: "Type wars",
       author: "Robert C. Martin",
       url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
@@ -41,6 +53,7 @@ describe('addition of a new blog listing', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `bearer ${loggedUser.body.token}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -52,6 +65,16 @@ describe('addition of a new blog listing', () => {
 
 describe('addition of a new blog listing without specifing likes value', () => {
   test('succeeds while adding default value', async () => {
+    const user = {
+      username: 'test',
+      password: '123456'
+    }
+
+    const loggedUser = await api
+      .post('/api/login')
+      .send(user)
+      .expect('Content-Type', /application\/json/)
+
     const newBlog = {
       title: "Type wars",
       author: "Robert C. Martin",
@@ -61,6 +84,7 @@ describe('addition of a new blog listing without specifing likes value', () => {
     const response = await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `bearer ${loggedUser.body.token}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
@@ -70,6 +94,16 @@ describe('addition of a new blog listing without specifing likes value', () => {
 
 describe('addition of an incomplete blog listing', () => {
   test('fails with status code 400 if data invaild', async () => {
+    const user = {
+      username: 'test',
+      password: '123456'
+    }
+
+    const loggedUser = await api
+      .post('/api/login')
+      .send(user)
+      .expect('Content-Type', /application\/json/)
+    
     const newBlog = {
       author: true
     }
@@ -80,6 +114,7 @@ describe('addition of an incomplete blog listing', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `bearer ${loggedUser.body.token}`)
       .expect(400)
 
     const responseGetAfter = await api.get('/api/blogs')

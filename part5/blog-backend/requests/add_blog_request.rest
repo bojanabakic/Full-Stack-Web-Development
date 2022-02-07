@@ -1,0 +1,7 @@
+POST http://localhost:3003/api/blogs 
+content-type: application/json 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6IjYxZDZmZDZiN2ZlYThlNzhkYjNmMjdkYSIsImlhdCI6MTY0MTU4ODgzMH0.YR7hbCFvBXLIeGGrszzFi8mTsQ-6GqM6dD70_6wrHqo
+
+{
+"title": "Alessandro Chiarelli", "author": "alexcarchiar", "url": "alessandrochiarelli.com", "likes": 10, "userId": "61d6fd6b7fea8e78db3f27da"
+}
